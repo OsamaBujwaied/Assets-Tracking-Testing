@@ -4,6 +4,7 @@ from .              import views
 
 urlpatterns = [
     path('', views.home, name="assets"),
+    path('assets', views.home, name="assets"),
     path('rfid/', views.rfid, name="rfid"),
     path('tags/', views.tags, name="tags"),
     path('employee/<str:employee_test>/', views.employee, name="employee"),
