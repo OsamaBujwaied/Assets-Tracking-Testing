@@ -4,7 +4,9 @@ from .models import *
 
 
 # Create your views here.
-
+def login(request):
+    context = {}
+    return render(request, 'assetstracking/login.html', context)
 
 def home(request): 
     subscriber = Subscriber.objects.all()
