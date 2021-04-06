@@ -1,13 +1,13 @@
 from django.shortcuts   import render
 from django.http        import HttpResponse
 from .models import *
-
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def login(request):
     context = {}
     return render(request, 'assetstracking/login.html', context)
-
+@login_required
 def home(request): 
     subscriber = Subscriber.objects.all()
     
@@ -19,7 +19,7 @@ def home(request):
         {'subscriber': subscriber, 'total_subscribers':total_subscribers, 'borrowing':borrowing }
         )
     
-
+@login_required
 def subscriber(request, subscriber_test): 
 
     subscriber = Subscriber.objects.get(id=subscriber_test)
