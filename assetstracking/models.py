@@ -12,8 +12,10 @@ class Subscriber(models.Model):
 
 class Employee(models.Model):
     employee_id = models.IntegerField(null=True)
+    employee_idX = models.IntegerField(null=True)
     employee_name = models.CharField(max_length=200, null=True)
     employee_salary = models.FloatField(null=True)
+    
 
     subscriber_id = models.ManyToManyField(Subscriber)
 
