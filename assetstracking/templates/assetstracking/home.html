@@ -1,15 +1,14 @@
-{%  extends 'assetstracking/main.html' %}
+{% extends 'assetstracking/main.html' %}
 
 {% block content %}
 
-{%  include 'assetstracking/status.html' %}
+{% include 'assetstracking/status.html' %}
 
 <br>
 
 <div class="row">
 	<div class="col-md-5">
 		<h5>Subscribers:</h5>
-		<hr>
 		<div class="card card-body">
 			<a class="btn btn-primary  btn-sm btn-block" href="">Subscribers</a>
 			<table class="table table-sm">
@@ -18,13 +17,13 @@
 					<th>ID </th>
 					<th>Name</th>
 				</tr>
-				
+
 				{% for i in subscriber %}
-					<tr>
-						<td><a class="btn btn-sm btn-info" href="{% url 'subscriber' i.subscriber_id %}">View</a></td>
-						<td>{{i.subscriber_id}}</td>
-						<td>{{i.subscriber_name}}</td>
-					</tr>
+				<tr>
+					<td><a class="btn btn-sm btn-info" href="{% url 'subscriber' i.subscriber_id %}">View</a></td>
+					<td>{{i.subscriber_id}}</td>
+					<td>{{i.subscriber_name}}</td>
+				</tr>
 				{% endfor %}
 
 			</table>
@@ -32,32 +31,29 @@
 	</div>
 
 	<div class="col-md-7">
-		<h5>LAST 155 Borrowing</h5>
-		<hr>
+		<h5>LAST Borrowing</h5>
 		<div class="card card-body">
 			<a class="btn btn-primary  btn-sm btn-block" href="">Borrowing List</a>
 			<table class="table table-sm">
 				<tr>
 					<th>ID number</th>
-                    <th>Employee</th>
+					<th>Employee</th>
 					<th>Asset</th>
 					<th>Date Start</th>
 					<th>Data End</th>
 				</tr>
-				
 				{% for i in borrowing %}
-					<tr>
-						<td>{{i.borrowing_id}}</td>
-						<td>{{i.employee_id}}</td>
-						<td>{{i.tag_id}}</td>
-						<td>{{i.start_date}}</td>
-						<td>{{i.end_date}}</td>
-					</tr>
+				<tr>
+					<td>{{i.borrowing_id}}</td>
+					<td>{{i.employee_id}}</td>
+					<td>{{i.tag_id}}</td>
+					<td>{{i.start_date}}</td>
+					<td>{{i.end_date}}</td>
+				</tr>
 				{% endfor %}
 			</table>
 		</div>
 	</div>
-
 </div>
 
 {% endblock %}

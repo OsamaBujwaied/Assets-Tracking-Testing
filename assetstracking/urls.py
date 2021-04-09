@@ -10,4 +10,6 @@ urlpatterns = [
     path('employee/<str:employee_test>/', views.employee, name="employee"),
     path('subscriber/<str:subscriber_test>/', views.subscriber, name="subscriber"),
     path('welcome', views.index),
+    path('login', views.login, name="login"),
+
 ]

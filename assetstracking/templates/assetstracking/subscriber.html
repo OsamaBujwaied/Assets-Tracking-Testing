@@ -1,8 +1,8 @@
-{%  extends 'assetstracking/main.html' %}
+{% extends 'assetstracking/main.html' %}
 
 {% block content %}
 
-	<br>
+<br>
 
 <div class="row">
 	<div class="col-md">
@@ -41,7 +41,7 @@
 			<hr>
 			<h1 style="text-align: center;padding: 10px">{{tag_count}}</h1>
 		</div>
-	</div>	
+	</div>
 
 	<div class="col-md">
 		<div class="card card-body">
@@ -49,7 +49,7 @@
 			<hr>
 			<h1 style="text-align: center;padding: 10px">{{rfid_count}}</h1>
 		</div>
-	</div>	
+	</div>
 
 	<div class="col-md">
 		<div class="card card-body">
@@ -60,25 +60,17 @@
 	</div>
 </div>
 
-
-<br>
-<div class="row">
-	<div class="col">
-		<div class="card card-body">
-			<form method="get">
-		    <button class="btn btn-primary" type="submit">Search</button>
-		  </form>
-		</div>
-	</div>
-</div>
 <br>
 
 <div class="row">
 	<div class="col-md">
+		<h5>Borrowing List</h5>
 		<div class="card card-body">
 			<table class="table table-sm">
 				<tr>
-					<th>Assets Borrowed</th>
+					<th>Assets Borroweing ID</th>
+					<th>Employee</th>
+					<th>Asset</th>
 					<th>Start Date</th>
 					<th>End Date</th>
 					<th>Extend</th>
@@ -87,10 +79,82 @@
 				{% for i in borrowings %}
 				<tr>
 					<td>{{i.borrowing_id}}</td>
+					<td>{{i.employee_id}}</td>
+					<td>{{i.tag_id}}</td>
 					<td>{{i.start_date}}</td>
 					<td>{{i.end_date}}</td>
 					<td><a class="btn btn-sm btn-info" href="">Extend</a></td>
 					<td><a class="btn btn-sm btn-danger" href="">Remove</a></td>
+				</tr>
+				{% endfor %}
+			</table>
+		</div>
+	</div>
+</div>
+
+<br>
+
+<div class="row">
+	<div class="col-md">
+		<h5>Assets</h5>
+		<div class="card card-body">
+			<table class="table table-sm">
+				<tr>
+					<th>Tag ID</th>
+					<th>Asset Name</th>
+					<th>Last RFID Reading Location</th>
+				</tr>
+				{% for i in tags %}
+				<tr>
+					<td>{{i.tag_id}}</td>
+					<td>{{i.asset_name}}</td>
+					<th></th>
+				</tr>
+				{% endfor %}
+			</table>
+		</div>
+	</div>
+</div>
+
+<br>
+
+<div class="row">
+	<div class="col-md">
+		<h5>RFID Readers</h5>
+		<div class="card card-body">
+			<table class="table table-sm">
+				<tr>
+					<th>RFID Reader ID</th>
+					<th>RFID Reader Location</th>
+				</tr>
+				{% for i in rfids %}
+				<tr>
+					<td>{{i.rfid_id}}</td>
+					<td>{{i.rfid_location}}</td>
+				</tr>
+				{% endfor %}
+			</table>
+		</div>
+	</div>
+</div>
+
+<br>
+
+<div class="row">
+	<div class="col-md">
+		<h5>Employees</h5>
+		<div class="card card-body">
+			<table class="table table-sm">
+				<tr>
+					<th>View</th>
+					<th>Employee ID</th>
+					<th>Employee Name</th>
+				</tr>
+				{% for i in employees %}
+				<tr>
+					<td><a class="btn btn-sm btn-info" href="{% url 'employee' i.employee_id %}">View</a></td>
+					<td>{{i.employee_id}}</td>
+					<td>{{i.employee_name}}</td>
 				</tr>
 				{% endfor %}
 			</table>
