@@ -10,7 +10,7 @@ def login(request):
     return render(request, 'assetstracking/login.html', context)
 
 
-@login_required
+# @login_required
 def home(request): 
     subscriber = Subscriber.objects.all()
     
@@ -22,7 +22,7 @@ def home(request):
     return render(request, 'assetstracking/home.html', context)
 
 
-@login_required
+# @login_required
 def subscriber(request, subscriber_test): 
 
     subscriber = Subscriber.objects.get(id=subscriber_test)
