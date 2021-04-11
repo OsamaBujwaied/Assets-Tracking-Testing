@@ -1,6 +1,7 @@
   
 from django.contrib import admin
 from .models import Subscriber, Employee, RFID, Tag, Borrowing, ClientAuth
+from .models import *
 
 # Register your models here.
 
