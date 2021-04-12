@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-
 # Create your models here.
 
 class Subscriber(models.Model):
@@ -41,6 +40,7 @@ class Tag(models.Model):
 
     subscriber_id = models.ManyToManyField(Subscriber)
     rfid_id = models.ManyToManyField(RFID)
+    asset_location = models.CharField(max_length=200, null=True)
 
     def __str__(self): return self.asset_name
 

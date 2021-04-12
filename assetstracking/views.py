@@ -3,6 +3,7 @@ from django.http        import HttpResponse
 from .models import *
 from django.contrib.auth.decorators import login_required
 from .forms import BorrowingForm, AssetForm
+from datetime import date
 # Create your views here.
 
 def login(request):
@@ -12,6 +13,9 @@ def login(request):
 
 # @login_required
 def home(request): 
+    today = date.today()
+    lastDay = Borrowing.objects.values('end_date')
+    print("nnnnnnnnnn",lastDay)
     subscriber = Subscriber.objects.all()
     
     total_subscribers = subscriber.count()
