@@ -275,4 +275,4 @@ def packet(request):
                 print("You are not authorized.!!")
                 return HttpResponse("not authorized", content_type='text/plain')
                 break
-    return HttpResponse(" ",  content_type='text/plain')
+    return HttpResponse("You Are Not Authorized To Access This Page!!!",  content_type='text/plain')
