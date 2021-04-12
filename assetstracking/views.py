@@ -74,7 +74,8 @@ def tags(request):
 
 def index(request): 
     return render(request, 'assetstracking/index.html')
-
+'''
 def Re(request):
-	context = {}
-	return render(request, 'accounts/Re.html', context)
+	# context = {}
+	return render(request, 'accounts/Re.html')
+'''
