@@ -299,6 +299,9 @@ def packet(request):
                                             update_asset_status.save()
                                             return HttpResponse("asset scanned", content_type='text/plain')
                                             break
+                                        elif tag_id == str(asset_id1) and employee1_scan_checker == 1 and asset1_scan_checker == 1:
+                                            print("Asset Alread Scanned.")
+                                            return HttpResponse("already scanned", content_type='text/plain')
                                         elif tag_id == str(asset_id1) and employee1_scan_checker == 0:
                                             print("Scan your employee ID first.")
                                             return HttpResponse("scan employee id first", content_type='text/plain')
