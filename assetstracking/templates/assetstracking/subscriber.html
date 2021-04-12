@@ -155,16 +155,16 @@
 					<th>View</th>
 					<th>Employee ID</th>
 					<th>Employee Name</th>
-					<th>Update</th>
-					<th>Remove</th>
+					<!--th>Update</th>
+					<th>Remove</th-->
 				</tr>
 				{% for i in employees %}
 				<tr>
 					<td><a class="btn btn-sm btn-info" href="{% url 'employee' i.employee_id %}">View</a></td>
 					<td>{{i.employee_id}}</td>
 					<td>{{i.employee_name}}</td>
-					<td><a class="btn btn-sm btn-info" href="">Update</a></td>
-					<td><a class="btn btn-sm btn-danger" href="">Remove</a></td>
+					<!--td><a class="btn btn-sm btn-info" href="">Update</a></td>
+					<td><a class="btn btn-sm btn-danger" href="">Remove</a></td-->
 				</tr>
 				{% endfor %}
 			</table>
