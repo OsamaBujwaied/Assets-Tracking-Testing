@@ -276,10 +276,10 @@ def packet(request):
 
                         elif reader_id[3:] == "02":
                             for k in assets_list:
-                                asset_id3 = model_to_dict(k)["tag_id"]
+				asset_id3 = model_to_dict(k)["tag_id"]
 				asset_status = model_to_dict(k)["asset_status"]
-                                id5 = model_to_dict(k)["id"]
-                                count += 1
+				id5 = model_to_dict(k)["id"]
+				count += 1
                                 if tag_id == str(asset_id3):
                                     for j in assets_borrowed:
                                     	count0 += 1
@@ -294,9 +294,11 @@ def packet(request):
                                             update_asset_checker.asset_id_scanned = 1
                                             update_asset_checker.save()
 						
-					    update_asset_status = assets_list.get(id=id5)
+                                            update_asset_status = assets_list.get(id=id5)
+
                                             update_asset_status.asset_status = "Taken"
                                             update_asset_status.save()
+					
                                             return HttpResponse("asset scanned", content_type='text/plain')
                                             break
                                         elif tag_id == str(asset_id1) and employee1_scan_checker == 0:
