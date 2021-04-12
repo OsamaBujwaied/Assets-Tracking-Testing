@@ -74,10 +74,10 @@ span.psw {
 </html>
 
 {% block content %}
-<h2>Log In</h2>
-<form method="post">
+<h2><p style="text-align:center;">Login</p></h2>
+<form method="post"><p style="text-align:center;">
   {% csrf_token %}
   {{ form.as_p }}
   <button type="submit">Log In</button>
-</form>
+</p></form>
 {% endblock %}

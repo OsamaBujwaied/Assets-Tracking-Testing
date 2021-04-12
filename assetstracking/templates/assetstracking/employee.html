@@ -2,6 +2,7 @@
 
 {% block content %}
 
+{% if user.employee.employee_id == employee.employee_id or perms.user.add_employee %}
 	<br>
 
 <div class="row">
@@ -18,8 +19,8 @@
 		<div class="card card-body">
 			<h5>Employee Information</h5>
 			<hr>
-			<p>Name: {{employee.employee_name}} </p>
-			<p>Phone: {{employee.employee_id}} </p>
+			<p>Name: {{user.employee.employee_name}} </p>
+			<p>ID Number: {{user.employee.employee_id}} </p>
 		</div>
 	</div>
 
@@ -50,7 +51,7 @@
 		<div class="card card-body">
 			<table class="table table-sm">
 				<tr>
-					<th>Assets Borrowed</th>
+					<th>Assets Borrowed {{user.borrowing.borrowing_id}}</th>
 					<th>Start Date</th>
 					<th>End Date</th>
 					<th>Extend</th>
@@ -69,5 +70,7 @@
 		</div>
 	</div>
 </div>
-
+{% else %}
+<li>You are not authorized to access this page</li>
+{% endif %}
 {% endblock %}
