@@ -276,13 +276,13 @@ def packet(request):
 
                         elif reader_id[3:] == "02":
                             for k in assets_list:
-				asset_id3 = model_to_dict(k)["tag_id"]
-				asset_status = model_to_dict(k)["asset_status"]
-				id5 = model_to_dict(k)["id"]
-				count += 1
+                                asset_id3 = model_to_dict(k)["tag_id"]
+                                asset_status = model_to_dict(k)["asset_status"]
+                                id5 = model_to_dict(k)["id"]
+                                count += 1
                                 if tag_id == str(asset_id3):
                                     for j in assets_borrowed:
-                                    	count0 += 1
+                                        count0 += 1
                                         id1 = model_to_dict(j)["id"]
                                         asset_id1 = j.tag_id.tag_id
                                         reader_id_code = model_to_dict(j)["reader_code"]
@@ -293,12 +293,10 @@ def packet(request):
                                             update_asset_checker = assets_borrowed.get(id=id1)
                                             update_asset_checker.asset_id_scanned = 1
                                             update_asset_checker.save()
-						
-                                            update_asset_status = assets_list.get(id=id5)
 
+                                            update_asset_status = assets_list.get(id=id5)
                                             update_asset_status.asset_status = "Taken"
                                             update_asset_status.save()
-					
                                             return HttpResponse("asset scanned", content_type='text/plain')
                                             break
                                         elif tag_id == str(asset_id1) and employee1_scan_checker == 0:
@@ -323,4 +321,4 @@ def packet(request):
                 print("You are not authorized.!!")
                 return HttpResponse("not authorized", content_type='text/plain')
                 break
-    return HttpResponse("You Are Not Authorized To Access This Page!!!",  content_type='text/plain')
+    return HttpResponse(" ",  content_type='text/plain')
