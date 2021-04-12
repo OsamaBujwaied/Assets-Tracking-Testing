@@ -282,7 +282,7 @@ def packet(request):
                                 count += 1
                                 if tag_id == str(asset_id3):
                                     for j in assets_borrowed:
-                                        count0 += 1
+                                    	count0 += 1
                                         id1 = model_to_dict(j)["id"]
                                         asset_id1 = j.tag_id.tag_id
                                         reader_id_code = model_to_dict(j)["reader_code"]
