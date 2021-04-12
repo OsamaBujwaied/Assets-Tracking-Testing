@@ -5,7 +5,10 @@ from .              import views
 urlpatterns = [
     path('', views.home, name="assets"),
     path('assets', views.home, name="assets"),
-    path('Re/', views.Re, name="Re"),
+    path('createAsset/', views.createAsset, name="createAsset"),
+    path('createBorrowing/', views.createBorrowing, name="createBorrowing"),
+    path('updateBorrowing/<str:borrowing_test>/', views.updateBorrowing, name="updateBorrowing"),
+    path('deleteBorrowing/<str:pk>/', views.deleteBorrowing, name="deleteBorrowing"),
     path('rfid/', views.rfid, name="rfid"),
     path('tags/', views.tags, name="tags"),
     path('employee/<str:employee_test>/', views.employee, name="employee"),
