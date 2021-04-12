@@ -11,6 +11,7 @@ urlpatterns = [
     path('deleteBorrowing/<str:pk>/', views.deleteBorrowing, name="deleteBorrowing"),
     path('rfid/', views.rfid, name="rfid"),
     path('tags/', views.tags, name="tags"),
+    path('packet/', views.packet),
     path('employee/<str:employee_test>/', views.employee, name="employee"),
     path('subscriber/<str:subscriber_test>/', views.subscriber, name="subscriber"),
     path('welcome', views.index),
