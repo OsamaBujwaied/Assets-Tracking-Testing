@@ -27,7 +27,7 @@ SECRET_KEY = 'l9ao=8*1pfvyfx2s%8gq@%_20c0n$07#ej3rcr^_o3fzun4&c2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['assets-tracking-testing.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['assets-tracking-coe.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
