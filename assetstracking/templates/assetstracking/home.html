@@ -33,7 +33,7 @@
 	<div class="col-md-7">
 		<h5>LAST Borrowing</h5>
 		<div class="card card-body">
-			<a class="btn btn-primary  btn-sm btn-block" href="">Borrowing List</a>
+			<a class="btn btn-primary  btn-sm btn-block" href="{% url 'createBorrowing' %}">Create a borrowing request</a>
 			<table class="table table-sm">
 				<tr>
 					<th>ID number</th>
@@ -49,6 +49,8 @@
 					<td>{{i.tag_id}}</td>
 					<td>{{i.start_date}}</td>
 					<td>{{i.end_date}}</td>
+					<td><a class="btn btn-sm btn-info" href="{% url 'updateBorrowing' i.id %}">Update</a></td>
+					<td><a class="btn btn-sm btn-danger" href="{% url 'deleteBorrowing' i.id %}">Delete</a></td>
 				</tr>
 				{% endfor %}
 			</table>
