@@ -15,6 +15,13 @@
       <li class="nav-item">
         <a class="nav-link" href="{% url 'login' %}">Login</a>
       </li>
+      <li class="nav-item active">
+        {% if perms.user.add_employee %}
+              <a class="nav-link" href="{% url 'login' %}">You have permission to do something in the foo app</a>
+          {% else %}
+              <a class="nav-link" href="{% url 'login' %}">You do not have permission to do something in the foo app</a>
+          {% endif %}
+      </li>
 	 {% if user.is_authenticated %}
        <li>User: {{ user.get_username }}</li>
 	   <li>------Name of employee: {{ user.employee.employee_name }}</li>
@@ -22,12 +29,7 @@
 	 {% else %}
        <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>
 	 {% endif %}
-	 
-	 {% if perms.user.add_employee %}
-         <p>-----You have permission to do something in the foo app.</p>
-     {% else %}
-         <p>-----You don't have permission to do anything in the foo app.</p>
-     {% endif %}
+
     </ul>
   </div>
 </nav>
