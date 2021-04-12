@@ -1,8 +1,8 @@
-from django.shortcuts   import render
+from django.shortcuts   import render, redirect
 from django.http        import HttpResponse
 from .models import *
 from django.contrib.auth.decorators import login_required
-
+from .forms import BorrowingForm, AssetForm
 # Create your views here.
 
 def login(request):
@@ -75,6 +75,51 @@ def tags(request):
 def index(request): 
     return render(request, 'assetstracking/index.html')
 
-def Re(request):
-	context = {}
-	return render(request, 'accounts/Re.html', context)
+def createBorrowing(request):
+
+    form = BorrowingForm()
+    if request.method == 'POST':
+        #print('Printing POST:', request.POST)
+        form = BorrowingForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/subscriber/1')
+
+    context = {'form':form}
+    return render(request, 'assetstracking/createBorrowing.html', context)
+    
+def updateBorrowing(request, borrowing_test):
+
+    borrowing = Borrowing.objects.get(id=borrowing_test)
+    form = BorrowingForm()
+
+    if request.method == 'POST':
+        form = BorrowingForm(request.POST, instance=borrowing)
+        if form.is_valid():
+            form.save()
+            return redirect('/subscriber/1')
+
+    context = {'form':form}
+    return render(request, 'assetstracking/createBorrowing.html', context)
+    
+def deleteBorrowing(request, pk):
+    borrowing = Borrowing.objects.get(id=pk)
+    if request.method == "POST":
+        borrowing.delete()
+        return redirect('/subscriber/1')
+    context = {'item': borrowing}
+    return render(request, 'assetstracking/deleteBorrowing.html',context)
+    
+    
+def createAsset(request):
+
+    form = AssetForm()
+    if request.method == 'POST':
+        #print('Printing POST:', request.POST)
+        form = AssetForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/subscriber/1')
+
+    context = {'form':form}
+    return render(request, 'assetstracking/createAsset.html', context)
