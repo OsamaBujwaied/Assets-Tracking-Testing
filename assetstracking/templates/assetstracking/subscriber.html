@@ -5,14 +5,14 @@
 <br>
 
 <div class="row">
-	<div class="col-md">
+	<!--div class="col-md">
 		<div class="card card-body">
-			<h5>Employee options:</h5>
+			<h5>Subscriber options:</h5>
 			<hr>
 			<a class="btn btn-outline-info  btn-sm btn-block" href="{% url 'createAsset' %}">ADD asset</a>
-			<a class="btn btn-outline-danger  btn-sm btn-block" href="">Delete asset</a>
+			<a class="btn btn-outline-info  btn-sm btn-block" href="">Add employee</a>
 		</div>
-	</div>
+	</div-->
 
 	<div class="col-md">
 		<div class="card card-body">
@@ -99,17 +99,22 @@
 	<div class="col-md">
 		<h5>Assets</h5>
 		<div class="card card-body">
+			<a class="btn btn-primary  btn-sm btn-block" href="{% url 'createAsset' %}">ADD Asset</a>
 			<table class="table table-sm">
 				<tr>
 					<th>Tag ID</th>
 					<th>Asset Name</th>
 					<th>Last RFID Reading Location</th>
+					<th>Update</th>
+					<th>Remove</th>
 				</tr>
 				{% for i in tags %}
 				<tr>
 					<td>{{i.tag_id}}</td>
 					<td>{{i.asset_name}}</td>
-					<th></th>
+					<th>{{i.rfid_id}}</th>
+					<td><a class="btn btn-sm btn-info" href="{% url 'updateAsset' i.id %}">Update</a></td>
+					<td><a class="btn btn-sm btn-danger" href="{% url 'deleteAsset' i.id %}">Remove</a></td>
 				</tr>
 				{% endfor %}
 			</table>
@@ -150,12 +155,16 @@
 					<th>View</th>
 					<th>Employee ID</th>
 					<th>Employee Name</th>
+					<th>Update</th>
+					<th>Remove</th>
 				</tr>
 				{% for i in employees %}
 				<tr>
 					<td><a class="btn btn-sm btn-info" href="{% url 'employee' i.employee_id %}">View</a></td>
 					<td>{{i.employee_id}}</td>
 					<td>{{i.employee_name}}</td>
+					<td><a class="btn btn-sm btn-info" href="">Update</a></td>
+					<td><a class="btn btn-sm btn-danger" href="">Remove</a></td>
 				</tr>
 				{% endfor %}
 			</table>

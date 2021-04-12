@@ -6,14 +6,15 @@
 	<br>
 
 <div class="row">
-	<div class="col-md">
+	
+	<!--div class="col-md">
 		<div class="card card-body">
 			<h5>Employee:</h5>
 			<hr>
 			<a class="btn btn-outline-info  btn-sm btn-block" href="">ADD Asset</a>
 			<a class="btn btn-outline-danger  btn-sm btn-block" href="">Delete Asset</a>
 		</div>
-	</div>
+	</div-->
 
 	<div class="col-md">
 		<div class="card card-body">
@@ -35,7 +36,7 @@
 
 
 <br>
-<div class="row">
+<!--div class="row">
 	<div class="col">
 		<div class="card card-body">
 			<form method="get">
@@ -43,7 +44,7 @@
 		  </form>
 		</div>
 	</div>
-</div>
+</div-->
 <br>
 
 <div class="row">
@@ -63,8 +64,8 @@
 					<td>{{i.borrowing_id}}</td>
 					<td>{{i.start_date}}</td>
 					<td>{{i.end_date}}</td>
-					<td><a class="btn btn-sm btn-info" href="">Extend</a></td>
-					<td><a class="btn btn-sm btn-danger" href="">Remove</a></td>
+					<td><a class="btn btn-sm btn-info" href="{% url 'extendBorrowing' i.id %}">Extend</a></td>
+					<td><a class="btn btn-sm btn-danger" href="{% url 'deleteBorrowing' i.id %}">Remove</a></td>
 				</tr>
 				{% endfor %}
 			</table>

@@ -1,12 +1,15 @@
 from django.shortcuts   import render, redirect
 from django.http        import HttpResponse
-from .models import *
+
 from django.views.decorators.csrf import csrf_exempt
 from django.forms.models import model_to_dict
 from django.contrib.auth.decorators import login_required
-from .forms import BorrowingForm, AssetForm
 from datetime import date
+
 # Create your views here.
+from .models import *
+from .forms import BorrowingForm, BorrowingFormEmployee, AssetForm
+
 
 def login(request):
     context = {}
@@ -81,8 +84,9 @@ def tags(request):
 def index(request): 
     return render(request, 'assetstracking/index.html')
 
-def createBorrowing(request):
 
+
+def createBorrowing(request):
     form = BorrowingForm()
     if request.method == 'POST':
         #print('Printing POST:', request.POST)
@@ -93,11 +97,12 @@ def createBorrowing(request):
 
     context = {'form':form}
     return render(request, 'assetstracking/createBorrowing.html', context)
-    
+
+
 def updateBorrowing(request, borrowing_test):
 
     borrowing = Borrowing.objects.get(id=borrowing_test)
-    form = BorrowingForm()
+    form = BorrowingForm(instance=borrowing)
 
     if request.method == 'POST':
         form = BorrowingForm(request.POST, instance=borrowing)
@@ -107,7 +112,8 @@ def updateBorrowing(request, borrowing_test):
 
     context = {'form':form}
     return render(request, 'assetstracking/createBorrowing.html', context)
-    
+
+
 def deleteBorrowing(request, pk):
     borrowing = Borrowing.objects.get(id=pk)
     if request.method == "POST":
@@ -116,9 +122,23 @@ def deleteBorrowing(request, pk):
     context = {'item': borrowing}
     return render(request, 'assetstracking/deleteBorrowing.html',context)
     
+def extendBorrowing(request, pk):
+
+    borrowing = Borrowing.objects.get(id=pk)
+    form = BorrowingFormEmployee(instance=borrowing)
+
+    if request.method == 'POST':
+        form = BorrowingForm(request.POST, instance=borrowing)
+        if form.is_valid():
+            form.save()
+            return redirect('/subscriber/1')
+
+    context = {'form':form}
+    return render(request, 'assetstracking/createBorrowing.html', context)
+
+
     
 def createAsset(request):
-
     form = AssetForm()
     if request.method == 'POST':
         #print('Printing POST:', request.POST)
@@ -130,6 +150,27 @@ def createAsset(request):
     context = {'form':form}
     return render(request, 'assetstracking/createAsset.html', context)
 
+def updateAsset(request, pk):
+    asset = Tag.objects.get(id=pk)
+    form = AssetForm(instance=asset)
+
+    if request.method == 'POST':
+        form = AssetForm(request.POST, instance=asset)
+        if form.is_valid():
+            form.save()
+            return redirect('/subscriber/1')
+
+    context = {'form':form}
+    return render(request, 'assetstracking/createAsset.html', context)
+
+def deleteAsset(request, pk):
+    asset = Tag.objects.get(id=pk)
+    if request.method == "POST":
+        asset.delete()
+        return redirect('/subscriber/1')
+    context = {'item': asset}
+    return render(request, 'assetstracking/deleteAsset.html',context)
+    
 
 @csrf_exempt
 def packet(request):
