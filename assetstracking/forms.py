@@ -16,4 +16,4 @@ class BorrowingFormEmployee(ModelForm):
 class AssetForm(ModelForm):
     class Meta:
         model = Tag
-        fields = ['tag_id', 'asset_name', 'rfid_id', 'asset_status']
+        fields = ['tag_id', 'asset_name', 'rfid_id', 'asset_status', 'asset_location']
