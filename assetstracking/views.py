@@ -9,11 +9,50 @@ from datetime import date
 # Create your views here.
 from .models import *
 from .forms import BorrowingForm, BorrowingFormEmployee, AssetForm
-
+from django.core.mail import send_mail
 
 def login(request):
     context = {}
     return render(request, 'assetstracking/login.html', context)
+
+
+def SendingEmail(request):
+    today = date.today()
+    CurrentYear = today.strftime('%Y')
+    CurrentMounth = today.strftime('%m')
+    CurrentDay = today.strftime('%d')
+    print("CurrentYear: ",CurrentYear)
+    print("CurrentMounth: ",CurrentMounth)
+    print("CurrentDay: ",CurrentDay)
+    lastDay = Borrowing.objects.values_list('end_date', flat=True)
+    DeadlineYear = [x.strftime('%Y') for x in lastDay]
+    DeadlineMounth = [x.strftime('%m') for x in lastDay]
+    DeadlineDay = [x.strftime('%d') for x in lastDay]
+    print("the list is: ",DeadlineYear)
+    print("the list is: ",DeadlineMounth)
+    print("the list is: ",DeadlineDay)
+    count1=0
+    for i in DeadlineYear:
+        CheckValue = 0
+        if CurrentYear > DeadlineYear[count1]:
+            CheckValue = 1
+        if CurrentYear == DeadlineYear[count1] and CurrentMounth > DeadlineMounth[count1]:
+            CheckValue = 1
+        if CurrentYear == DeadlineYear[count1] and CurrentMounth == DeadlineMounth[count1] and CurrentDay > DeadlineDay[count1]:
+            CheckValue = 1
+        if CheckValue == 1:
+            send_mail(
+                'This is final test',
+                'This is final test',
+                'AssetsTracking70@gmail.com',
+                ['iyhmx7@gmail.com'],
+                fail_silently=False,)
+            print("here")
+        count1 = count1 + 1
+
+
+    context = {}
+    return HttpResponse(" X ")
 
 
 # @login_required
