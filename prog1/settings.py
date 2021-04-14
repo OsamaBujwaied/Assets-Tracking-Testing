@@ -136,3 +136,12 @@ STATICFILES_DIRS = [
 ]
 
 LOGIN_REDIRECT_URL = '/login'
+
+#xybapzlmqzkyofbo
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'AssetsTracking70@gmail.com'
+EMAIL_HOST_PASSWORD = 'xybapzlmqzkyofbo' #past the key or password app here
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'AssetsTracking70@gmail.com'
