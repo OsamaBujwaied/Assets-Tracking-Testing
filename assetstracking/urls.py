@@ -3,7 +3,7 @@ from .              import views
 
 
 urlpatterns = [
-    path('', views.home, name="assets"),
+    path('', views.index),
     path('assets', views.home, name="assets"),
     path('rfid/', views.rfid, name="rfid"),
     path('tags/', views.tags, name="tags"),
