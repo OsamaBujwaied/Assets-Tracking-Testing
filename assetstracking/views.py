@@ -223,6 +223,8 @@ def packet(request):
     r = readers.count()
     count = 0
     count0 = 0
+    count1 = 0
+    count2 = 0
     if request.method == "POST":
         client_username = request.POST.__getitem__('username')
         client_password = request.POST.__getitem__('password')
@@ -234,8 +236,6 @@ def packet(request):
             if client_username == real_client_username and client_password == real_client_password:
                 tag_id = request.POST.__getitem__('TagID')
                 reader_id = request.POST.__getitem__('ReaderID')
-
-
 
                 for i in readers:
                     reader_id0 = str(model_to_dict(i)["rfid_id"])
@@ -306,56 +306,60 @@ def packet(request):
                                             continue
                                     break
                                 elif count == employees_list_count:
-                                    print("This is not an employee ID!!")
-                                    return HttpResponse("not employee id", content_type='text/plain')
-                                    break
-                                else:
-                                    continue
+                                    #print("This is not an employee ID!!")
+                                    #return HttpResponse("not employee id", content_type='text/plain')
+                                    #break
+                                    for q in assets_list:
+                                        asset_id3 = model_to_dict(q)["tag_id"]
+                                        asset_status = model_to_dict(q)["asset_status"]
+                                        id5 = model_to_dict(q)["id"]
+                                        count1 += 1
+                                        if tag_id == str(asset_id3):
+                                            for b in assets_borrowed:
+                                                count2 += 1
+                                                id1 = model_to_dict(b)["id"]
+                                                asset_id1 = b.tag_id.tag_id
+                                                reader_id_code = model_to_dict(b)["reader_code"]
+                                                employee1_scan_checker = model_to_dict(b)["employee_id_scanned"]
+                                                asset1_scan_checker = model_to_dict(b)["asset_id_scanned"]
+                                                print(employee1_scan_checker)
+                                                if tag_id == str(
+                                                        asset_id1) and employee1_scan_checker == 1 and reader_id[
+                                                                                                       0:3] == reader_id_code and asset1_scan_checker == 0:
+                                                    print("There is request for this asset.")
+                                                    update_asset_checker = assets_borrowed.get(id=id1)
+                                                    update_asset_checker.asset_id_scanned = 1
+                                                    update_asset_checker.save()
 
-
-                        elif reader_id[3:] == "02":
-                            for k in assets_list:
-                                asset_id3 = model_to_dict(k)["tag_id"]
-                                asset_status = model_to_dict(k)["asset_status"]
-                                id5 = model_to_dict(k)["id"]
-                                count += 1
-                                if tag_id == str(asset_id3):
-                                    for j in assets_borrowed:
-                                        count0 += 1
-                                        id1 = model_to_dict(j)["id"]
-                                        asset_id1 = j.tag_id.tag_id
-                                        reader_id_code = model_to_dict(j)["reader_code"]
-                                        employee1_scan_checker = model_to_dict(j)["employee_id_scanned"]
-                                        asset1_scan_checker = model_to_dict(j)["asset_id_scanned"]
-                                        if tag_id == str(asset_id1) and employee1_scan_checker == 1 and reader_id[0:3] == reader_id_code:
-                                            print("There is request for this asset.")
-                                            update_asset_checker = assets_borrowed.get(id=id1)
-                                            update_asset_checker.asset_id_scanned = 1
-                                            update_asset_checker.save()
-
-                                            update_asset_status = assets_list.get(id=id5)
-                                            update_asset_status.asset_status = "Taken"
-                                            update_asset_status.save()
-                                            return HttpResponse("asset scanned", content_type='text/plain')
+                                                    update_asset_status = assets_list.get(id=id5)
+                                                    update_asset_status.asset_status = "Taken"
+                                                    update_asset_status.save()
+                                                    return HttpResponse("asset scanned", content_type='text/plain')
+                                                    break
+                                                elif tag_id == str(
+                                                        asset_id1) and employee1_scan_checker == 1 and asset1_scan_checker == 1:
+                                                    print("Asset Alread Scanned.")
+                                                    return HttpResponse("already scanned", content_type='text/plain')
+                                                    break
+                                                elif tag_id == str(asset_id1) and employee1_scan_checker == 0:
+                                                    print("Scan your employee ID first.")
+                                                    return HttpResponse("scan employee id first",
+                                                                        content_type='text/plain')
+                                                    break
+                                                elif count2 == (a):
+                                                    print("There is no request for this asset id")
+                                                    return HttpResponse("no request for asset",
+                                                                        content_type='text/plain')
+                                                    break
+                                                else:
+                                                    continue
                                             break
-                                        elif tag_id == str(asset_id1) and employee1_scan_checker == 1 and asset1_scan_checker == 1:
-                                            print("Asset Alread Scanned.")
-                                            return HttpResponse("already scanned", content_type='text/plain')
-                                        elif tag_id == str(asset_id1) and employee1_scan_checker == 0:
-                                            print("Scan your employee ID first.")
-                                            return HttpResponse("scan employee id first", content_type='text/plain')
-                                            break
-                                        elif count0 == (a):
-                                            print("There is no request for this asset id")
-                                            return HttpResponse("no request for asset", content_type='text/plain')
+                                        elif count1 == assets_list_count:
+                                            print("This not an employee nor an asset ID!!")
+                                            return HttpResponse("not asset nor employee id", content_type='text/plain')
                                             break
                                         else:
                                             continue
-                                    break
-                                elif count == assets_list_count:
-                                    print("This not an asset ID!!")
-                                    return HttpResponse("not asset id", content_type='text/plain')
-                                    break
                                 else:
                                     continue
                 break
@@ -363,4 +367,4 @@ def packet(request):
                 print("You are not authorized.!!")
                 return HttpResponse("not authorized", content_type='text/plain')
                 break
-    return HttpResponse(" ",  content_type='text/plain')
+    return HttpResponse(" ", content_type='text/plain')
