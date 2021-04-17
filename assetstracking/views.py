@@ -5,7 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.forms.models import model_to_dict
 from django.contrib.auth.decorators import login_required
 from datetime import date
-
+from django.forms import inlineformset_factory
 # Create your views here.
 from .models import *
 from .forms import BorrowingForm, BorrowingFormEmployee, AssetForm
@@ -42,8 +42,8 @@ def SendingEmail(request):
             CheckValue = 1
         if CheckValue == 1:
             send_mail(
-                'This is final test',
-                'This is final test',
+                'Borrowing deadline',
+                'One of the employee did not return the asset he borrowed',
                 'AssetsTracking70@gmail.com',
                 ['iyhmx7@gmail.com'],
                 fail_silently=False,)
@@ -126,15 +126,19 @@ def index(request):
 
 
 def createBorrowing(request):
-    form = BorrowingForm()
+    BorrowingFormSet = inlineformset_factory(Employee, Borrowing, fields=('borrowing_id','end_date','tag_id'))
+    employee = Employee.objects.get(id=pk)
+    formset = BorrowingFormSet(queryset=Borrowing.objects.none(), instance=employee)
+    #form = BorrowingForm(initial = {'employee_id':employee})
     if request.method == 'POST':
         #print('Printing POST:', request.POST)
-        form = BorrowingForm(request.POST)
-        if form.is_valid():
-            form.save()
+        #form = BorrowingForm(request.POST)
+        formset = BorrowingFormSet(request.POST, instance=employee)
+        if formset.is_valid():
+            formset.save()
             return redirect('/subscriber/1')
 
-    context = {'form':form}
+    context = {'formset':formset}
     return render(request, 'assetstracking/createBorrowing.html', context)
 
 
