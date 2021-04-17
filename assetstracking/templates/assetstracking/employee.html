@@ -57,7 +57,6 @@
 					<th>Start Date</th>
 					<th>End Date</th>
 					<th>Extend</th>
-					<th>Remove</th>
 				</tr>
 				{% for i in borrowings %}
 				<tr>
@@ -65,7 +64,6 @@
 					<td>{{i.start_date}}</td>
 					<td>{{i.end_date}}</td>
 					<td><a class="btn btn-sm btn-info" href="{% url 'extendBorrowing' i.id %}">Extend</a></td>
-					<td><a class="btn btn-sm btn-danger" href="{% url 'deleteBorrowing' i.id %}">Remove</a></td>
 				</tr>
 				{% endfor %}
 			</table>
