@@ -1,7 +1,7 @@
 {% extends 'assetstracking/main.html' %}
 
 {% block content %}
-
+{% if perms.user.add_employee %}
 <br>
 
 <div class="row">
@@ -171,5 +171,20 @@
 		</div>
 	</div>
 </div>
+{% else %}
+<head>
+<style>
+p.ex1 {
+  font-size: 30px;
+}
+p.ex2 {
+  font-size: 50px;
+}
+</style>
+</head>
+<body>
+<p class="ex2">Done</p>
 
+</body>
+{% endif %}
 {% endblock %}
