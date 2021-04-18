@@ -55,7 +55,7 @@ def SendingEmail(request):
     return HttpResponse(" X ")
 
 
-# @login_required
+@login_required
 def home(request): 
     today = date.today()
     lastDay = Borrowing.objects.values('end_date')
@@ -70,7 +70,7 @@ def home(request):
     return render(request, 'assetstracking/home.html', context)
 
 
-# @login_required
+@login_required
 def subscriber(request, subscriber_test): 
 
     subscriber = Subscriber.objects.get(id=subscriber_test)
@@ -96,7 +96,7 @@ def subscriber(request, subscriber_test):
                 }
     return render(request, 'assetstracking/subscriber.html', context)
 
-
+@login_required
 def employee(request, employee_test): 
 
     employee = Employee.objects.get(id=employee_test)
@@ -109,12 +109,12 @@ def employee(request, employee_test):
 
 
 
-
+@login_required
 def rfid(request): 
     rfid = RFID.objects.all()
     return HttpResponse('RDID reader page')
 
-
+@login_required
 def tags(request): 
     tags = Tag.objects.all()
     return render(request, 'assetstracking/tags.html', {'tags': tags})
@@ -124,7 +124,7 @@ def index(request):
     return render(request, 'assetstracking/index.html')
 
 
-
+@login_required
 def createBorrowing(request, pk):
     BorrowingFormSet = inlineformset_factory(Employee, Borrowing, fields=('borrowing_id','end_date','tag_id'))
     employee = Employee.objects.get(id=pk)
@@ -141,7 +141,7 @@ def createBorrowing(request, pk):
     context = {'formset':formset}
     return render(request, 'assetstracking/createBorrowing.html', context)
 
-
+@login_required
 def updateBorrowing(request, borrowing_test):
 
     borrowing = Borrowing.objects.get(id=borrowing_test)
@@ -156,7 +156,7 @@ def updateBorrowing(request, borrowing_test):
     context = {'form':form}
     return render(request, 'assetstracking/createBorrowing.html', context)
 
-
+@login_required
 def deleteBorrowing(request, pk):
     borrowing = Borrowing.objects.get(id=pk)
     if request.method == "POST":
@@ -164,7 +164,7 @@ def deleteBorrowing(request, pk):
         return redirect('/subscriber/1')
     context = {'item': borrowing}
     return render(request, 'assetstracking/deleteBorrowing.html',context)
-    
+@login_required
 def extendBorrowing(request, pk):
 
     borrowing = Borrowing.objects.get(id=pk)
@@ -180,7 +180,7 @@ def extendBorrowing(request, pk):
     return render(request, 'assetstracking/createBorrowing.html', context)
 
 
-    
+@login_required
 def createAsset(request):
     form = AssetForm()
     if request.method == 'POST':
@@ -192,7 +192,7 @@ def createAsset(request):
 
     context = {'form':form}
     return render(request, 'assetstracking/createAsset.html', context)
-
+@login_required
 def updateAsset(request, pk):
     asset = Tag.objects.get(id=pk)
     form = AssetForm(instance=asset)
@@ -205,7 +205,7 @@ def updateAsset(request, pk):
 
     context = {'form':form}
     return render(request, 'assetstracking/createAsset.html', context)
-
+@login_required
 def deleteAsset(request, pk):
     asset = Tag.objects.get(id=pk)
     if request.method == "POST":
