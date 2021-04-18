@@ -10,48 +10,14 @@
 							content="0; url = subscriber/1/" /> 
 					</head>
 					</html>	
-
-	 {% elif user.employee.employee_id == 2 or perms.user.add_employee %}
-       <li>Success}</li>
-			<html> 
-			  
-			<head> 
-				<title>HTML Redirect</title> 
-				<meta http-equiv="refresh"
-					content="1; url = employee/2/" /> 
-			</head> 
-			  
-			<body> 
-				<h1 style="text-align:center;color:green;"> 
-					 Wait 5 seconds
-				</h1> 
-				  
-				<p style="text-align:center;"> 
-					If your browser supports Refresh, 
-					you'll be redirected to GeeksforGeeks 
-					Homepage, in 5 seconds. 
-				</p> 
-			</body> 
-			  
-			</html> 
-	 {% elif user.employee.employee_id == 4 or perms.user.add_employee %}
+	 {% else %}
 	        <html>   
 			<head> Wait!
 				<title>HTML Redirect</title> 
 				<meta http-equiv="refresh"
-					content="1; url = employee/4/" /> 
-			</head>
-            </html>			
-     {% elif user.employee.employee_id == 3 or perms.user.add_employee %}
-	        <html>   
-			<head> Wait!
-				<title>HTML Redirect</title> 
-				<meta http-equiv="refresh"
-					content="1; url = employee/3/" /> 
+					content="1; url = employee/{{user.employee.employee_id}}/" /> 
 			</head>
             </html>	
-	 {% else %}
-       <li>Error</li>
 	 {% endif %}
 
 <h3>5 Seconds</h3>
