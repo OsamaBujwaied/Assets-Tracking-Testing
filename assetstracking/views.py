@@ -143,17 +143,17 @@ def createBorrowing(request, pk):
 
 @login_required
 def updateBorrowing(request, borrowing_test):
-
+    BorrowingFormSet = inlineformset_factory(Employee, Borrowing, fields=('end_date','tag_id'))
     borrowing = Borrowing.objects.get(id=borrowing_test)
-    form = BorrowingForm(instance=borrowing)
+    formset = BorrowingFormSet(queryset=Borrowing.objects.none(), instance=employee)
 
     if request.method == 'POST':
-        form = BorrowingForm(request.POST, instance=borrowing)
-        if form.is_valid():
-            form.save()
-            return redirect('/subscriber/1')
+        formset = BorrowingFormSet(request.POST, instance=borrowing)
+        if formset.is_valid():
+            formset.save()
+            return redirect('/login')
 
-    context = {'form':form}
+    context = {'formset':formset}
     return render(request, 'assetstracking/createBorrowing.html', context)
 
 @login_required
