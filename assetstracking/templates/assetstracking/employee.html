@@ -60,7 +60,7 @@
 				</tr>
 				{% for i in borrowings %}
 				<tr>
-					<td>{{i.borrowing_id}}</td>
+					<td>{{i.tag_id}}</td>
 					<td>{{i.start_date}}</td>
 					<td>{{i.end_date}}</td>
 					<td><a class="btn btn-sm btn-info" href="{% url 'extendBorrowing' i.id %}">Extend</a></td>
