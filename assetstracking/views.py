@@ -145,7 +145,7 @@ def createBorrowing(request, pk):
 def updateBorrowing(request, borrowing_test):
     BorrowingFormSet = inlineformset_factory(Employee, Borrowing, fields=('end_date','tag_id'))
     borrowing = Borrowing.objects.get(id=borrowing_test)
-    formset = BorrowingFormSet(queryset=Borrowing.objects.none(), instance=employee)
+    formset = BorrowingFormSet(queryset=Borrowing.objects.none(), instance=borrowing)
 
     if request.method == 'POST':
         formset = BorrowingFormSet(request.POST, instance=borrowing)
