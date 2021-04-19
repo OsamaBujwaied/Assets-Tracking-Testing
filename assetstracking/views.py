@@ -136,7 +136,7 @@ def createBorrowing(request, pk):
         formset = BorrowingFormSet(request.POST, instance=employee)
         if formset.is_valid():
             formset.save()
-            return redirect('/employee/')
+            return redirect('/login/')
 
     context = {'formset':formset}
     return render(request, 'assetstracking/createBorrowing.html', context)
