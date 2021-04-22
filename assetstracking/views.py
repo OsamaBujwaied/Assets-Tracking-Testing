@@ -126,7 +126,7 @@ def index(request):
 
 @login_required
 def createBorrowing(request, pk):
-    BorrowingFormSet = inlineformset_factory(Employee, Borrowing, fields=('end_date','tag_id'))
+    BorrowingFormSet = inlineformset_factory(Employee, Borrowing, fields=('end_date','tag_id', 'subscriber_id'))
     employee = Employee.objects.get(id=pk)
     formset = BorrowingFormSet(queryset=Borrowing.objects.none(), instance=employee)
     #form = BorrowingForm(initial = {'employee_id':employee})
