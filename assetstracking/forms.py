@@ -5,7 +5,7 @@ from .models import Borrowing, Tag
 class BorrowingForm(ModelForm):
     class Meta:
         model = Borrowing
-        fields = ['end_date', 'employee_id', 'tag_id', 'subscriber_id']
+        fields = ['subscriber_id', 'end_date', 'employee_id', 'tag_id']
         
 class BorrowingFormEmployee(ModelForm):
     class Meta:
