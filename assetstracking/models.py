@@ -50,7 +50,7 @@ class Borrowing(models.Model):
     start_date = models.DateField(auto_now_add=True, null=True)
     end_date = models.DateField(null=True)
 
-    subscriber_id = models.ManyToManyField(Subscriber, default=1)
+    subscriber_id = models.ManyToManyField(Subscriber)
 
     employee_id = models.ForeignKey(Employee, null=True, on_delete= models.SET_NULL)
     tag_id = models.ForeignKey(Tag, null=True, on_delete= models.SET_NULL)
